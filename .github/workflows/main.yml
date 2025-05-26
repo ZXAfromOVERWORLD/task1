@@ -1,5 +1,14 @@
 name: Deploy web page
-on: [push]
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -10,6 +19,9 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
+      - name: Setup artifact upload (fix)
+        uses: actions/upload-artifact@v3
 
       - name: Upload static files
         uses: actions/upload-pages-artifact@v2
